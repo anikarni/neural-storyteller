@@ -9,4 +9,4 @@ eel.init('web')
 
 _options = { 'mode': 'None' }
 
-eel.start('dist/index.html', options=_options)
+eel.start('bundle/index.html', options=_options)
