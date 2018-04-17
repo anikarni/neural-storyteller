@@ -4,6 +4,6 @@ scipy>=1.0.1
 nltk>=3.2.5
 scikit-learn
 Lasagne==0.1
-scikit-emage
+scikit-image
 Theano==0.8.2
-caffe
+redis
