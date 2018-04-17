@@ -20,9 +20,8 @@ const takeSnapshot = () => {
 
   Webcam.snap((data_uri) => {
     document.getElementById('picture').innerHTML = '<img src="'+data_uri+'"/>';
+    const story = eel.generate_story(str.substring(str.indexOf(",") + 1))
   });
 }
 
 global.takeSnapshot = takeSnapshot
-
-console.log(eel.generate_story('/Users/aarni/Documents/code/play/neural-storyteller/neural/images/ex2.jpg'))
