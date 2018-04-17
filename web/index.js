@@ -12,15 +12,23 @@ Webcam.set({
     flip_horiz: true,
     fps: 45
 });
+
 Webcam.attach('#my_camera')
 
-const takeSnapshot = () => {
+const displayResultSection = () => {
   $('#take-picture').css('display', 'none');
   $('#result').css('display', 'flex');
+}
 
-  Webcam.snap((data_uri) => {
-    document.getElementById('picture').innerHTML = '<img src="'+data_uri+'"/>';
-    const story = eel.generate_story(str.substring(str.indexOf(",") + 1))
+const extractBase64ImageFromString = (base64String) =>
+  base64String.substring(base64String.indexOf(",") + 1)
+
+const takeSnapshot = () => {
+  displayResultSection()
+
+  Webcam.snap((dataUri) => {
+    document.getElementById('picture').innerHTML = '<img src="'+dataUri+'"/>';
+    const story = eel.generate_story(extractBase64ImageFromString(dataUri))
   });
 }
 
