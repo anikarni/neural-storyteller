@@ -31,12 +31,13 @@ For running on CPU, you will need to download the VGG-19 prototxt and model by:
 
 ```
 pip install -r requirements.txt
+cd web && npm install
 ```
 
 ## run
 
 ```
-python index.py
+npm start
 ```
 
 ## The original neural-storyteller
