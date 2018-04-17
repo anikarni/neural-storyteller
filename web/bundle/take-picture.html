@@ -1,20 +1,20 @@
 <html>
   <head>
-    <title>Generating Stories</title>
+    <title>Generating Stories - Take a Picture</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <nav class="navbar navbar-light bg-light">
-      <a class="navbar-brand" href="index.html">Header</a>
+			<a class="navbar-brand" href="index.html">Header</a>
     </nav>
-    <div class="jumbotron">
-      <h1 class="display-4">Hello, world!</h1>
-      <a href="take-picture.html" class="btn btn-primary active"> Take Pic </a>
-    </div>
+    <div id="my_camera" style="width:320px; height:240px;"></div>
+    <div id="my_result"></div>
+    <a href="javascript:void(takeSnapshot())">Take Snapshot</a>
 		<footer class="footer">
 			<span class="text-muted">Footer</span>
     </footer>
   </body>
   <script type="text/javascript" src="/eel.js"></script>
+  <script type="text/javascript" src="bundle.js"></script>
 </html>
