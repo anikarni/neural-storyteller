@@ -59,6 +59,7 @@ target/
 # Frontend
 web/node_modules
 web/bundle/bundle.js
+images/
 
 # Vim
 *.swp
