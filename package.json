@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "This project seeks to create a easily accessible UI for uploading images and generating images based on the [neural-storyteller](git@github.com:ryankiros/neural-storyteller.git) project. All props go to their work.",
   "scripts": {
+    "install": "cd web && npm install",
     "start": "cd web && npm start",
     "start:server": "npm run build-frontend && npm run start-server",
     "build-frontend": "cd web && npm run build",
