@@ -24,3 +24,5 @@ const takeSnapshot = () => {
 }
 
 global.takeSnapshot = takeSnapshot
+
+console.log(eel.generate_story('/Users/aarni/Documents/code/play/neural-storyteller/neural/images/ex2.jpg'))

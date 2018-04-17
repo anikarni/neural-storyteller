@@ -23,7 +23,7 @@ For running on CPU, you will need to download the VGG-19 prototxt and model by:
     wget http://www.robots.ox.ac.uk/~vgg/software/very_deep/caffe/VGG_ILSVRC_19_layers.caffemodel
     wget https://gist.githubusercontent.com/ksimonyan/3785162f95cd2d5fee77/raw/bb2b4fe0a9bb0669211cf3d0bc949dfdda173e9e/VGG_ILSVRC_19_layers_deploy.prototxt
 
- You also need to modify pycaffe and model path in `neural/config.py`, and modify the flag in line 8 as:
+You also need to modify pycaffe and model path in `neural/config.py`, and modify the flag in line 8 as:
 
     FLAG_CPU_MODE = True
 
