@@ -58,10 +58,12 @@ target/
 
 # Frontend
 web/node_modules
+web/bundle/bundle.js
 
 # Vim
 *.swp
 *.swo
-#
+
 # models
 models/
+
