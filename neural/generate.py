@@ -72,6 +72,7 @@ def story(z, image_loc, k=100, bw=50, lyric=False):
                 print line[1:]
     else:
         print passage
+    return passage
 
 
 def load_all():
