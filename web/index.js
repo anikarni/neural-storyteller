@@ -1,1 +1,1 @@
-console.log(eel.generate_story('dsd'))
+console.log('does it work?')

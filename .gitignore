@@ -58,3 +58,10 @@ target/
 
 # Ignore changes to configuration file
 config.py
+
+# Frontend
+web/node_modules
+
+# Vim
+*.swp
+*.swo
