@@ -15,8 +15,8 @@ Webcam.set({
 Webcam.attach('#my_camera')
 
 const takeSnapshot = () => {
-  $('#take-picture').hide();
-  $('#result').show();
+  $('#take-picture').css('display', 'none');
+  $('#result').css('display', 'flex');
 
   Webcam.snap((data_uri) => {
     document.getElementById('picture').innerHTML = '<img src="'+data_uri+'"/>';
