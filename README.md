@@ -37,7 +37,11 @@ cd web && npm install
 ## run
 
 ```
-npm start
+npm run start:server
+```
+or
+```
+npm start // Frontend app only
 ```
 
 ## The original neural-storyteller
