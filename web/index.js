@@ -20,15 +20,24 @@ const displayResultSection = () => {
   $('#result').css('display', 'flex');
 }
 
-const extractBase64ImageFromString = (base64String) =>
-  base64String.substring(base64String.indexOf(",") + 1)
+const displayImage = imageUri =>
+  document.getElementById('picture').innerHTML = '<img src="'+imageUri+'"/>';
+
+const displayStory = story =>
+  $('#story').html(story)
+
+const extractBase64FromImageUri = base64Uri =>
+  base64Uri.substring(base64Uri.indexOf(",") + 1)
+
+const generateStory = imageUri =>
+  eel.generate_story(extractBase64FromImageUri(imageUri))(story => displayStory(story))
 
 const takeSnapshot = () => {
   displayResultSection()
 
-  Webcam.snap((dataUri) => {
-    document.getElementById('picture').innerHTML = '<img src="'+dataUri+'"/>';
-    const story = eel.generate_story(extractBase64ImageFromString(dataUri))
+  Webcam.snap(imageUri => {
+    displayImage(imageUri)
+    generateStory(imageUri)
   });
 }
 
