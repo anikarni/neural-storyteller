@@ -60,6 +60,7 @@ target/
 web/node_modules
 web/bundle/bundle.js
 images/
+.DS_Store
 
 # Vim
 *.swp

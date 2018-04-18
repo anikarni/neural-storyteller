@@ -11,13 +11,13 @@ Webcam.set({
     force_flash: false,
     flip_horiz: true,
     fps: 45
-});
+})
 
 Webcam.attach('#my_camera')
 
 const displayResultSection = () => {
-  $('#take-picture').css('display', 'none');
-  $('#result').css('display', 'flex');
+  $('#take-picture').css('display', 'none')
+  $('#result').css('display', 'flex')
 }
 
 const displayImage = imageUri =>
