@@ -15,6 +15,15 @@ entry: './main.js',
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ['babel-loader']
+      },
+			{
+        test: /\.(scss)$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'postcss-loader', options: { plugins: function () { return [ require('autoprefixer') ]}}},
+          { loader: 'sass-loader' }
+        ]
       }
     ]
   },
