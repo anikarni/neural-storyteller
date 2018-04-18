@@ -6,6 +6,8 @@ import numpy
 import copy
 import sys
 import skimage.transform
+import pickle
+import json
 
 import skipthoughts
 import decoder
@@ -75,67 +77,65 @@ def story(z, image_loc, k=100, bw=50, lyric=False):
     return passage
 
 
-def load_all():
-    """
-    Load everything we need for generating
-    """
-    print config.paths['decmodel']
-
-    # Skip-thoughts
-    print 'Loading skip-thoughts...'
-    stv = skipthoughts.load_model(config.paths['skmodels'],
-                                  config.paths['sktables'])
-
-    # Decoder
-    print 'Loading decoder...'
-    dec = decoder.load_model(config.paths['decmodel'],
-                             config.paths['dictionary'])
-
-    # Image-sentence embedding
-    print 'Loading image-sentence embedding...'
-    vse = embedding.load_model(config.paths['vsemodel'])
-
-    # VGG-19
-    print 'Loading and initializing ConvNet...'
-
+def create_covnet():
     if config.FLAG_CPU_MODE:
         sys.path.insert(0, config.paths['pycaffe'])
         import caffe
         caffe.set_mode_cpu()
-        net = caffe.Net(config.paths['vgg_proto_caffe'],
+        return caffe.Net(config.paths['vgg_proto_caffe'],
                         config.paths['vgg_model_caffe'],
                         caffe.TEST)
     else:
-        net = build_convnet(config.paths['vgg'])
+        return build_convnet(config.paths['vgg'])
 
-    # Captions
-    print 'Loading captions...'
+def create_captions():
     cap = []
     with open(config.paths['captions'], 'rb') as f:
         for line in f:
             cap.append(line.strip())
+    return cap
 
-    # Caption embeddings
-    print 'Embedding captions...'
-    cvec = embedding.encode_sentences(vse, cap, verbose=False)
 
-    # Biases
-    print 'Loading biases...'
-    bneg = numpy.load(config.paths['negbias'])
-    bpos = numpy.load(config.paths['posbias'])
+def load_all(redis):
+    """
+    Load everything we need for generating
+    """
+    def load(field_name, create_field):
+        field = redis.get(field_name)
+        if not field:
+            print 'Creating field'
+            field = create_field()
+            redis.set(field_name, field)
+        return field
 
-    # Pack up
+
+    print config.paths['decmodel']
     z = {}
-    z['stv'] = stv
-    z['dec'] = dec
-    z['vse'] = vse
-    z['net'] = net
-    z['cap'] = cap
-    z['cvec'] = cvec
-    z['bneg'] = bneg
-    z['bpos'] = bpos
+
+    print 'Loading skip-thoughts...'
+    z['stv'] = load('stv', lambda: skipthoughts.load_model(config.paths['skmodels'], config.paths['sktables']))
+
+    print 'Loading decoder...'
+    z['dec'] = load('dec', lambda: decoder.load_model(config.paths['decmodel'], config.paths['dictionary']))
+
+    print 'Loading image-sentence embedding...'
+    z['vse'] = load('vse', lambda: embedding.load_model(config.paths['vsemodel']))
+
+    print 'Loading and initializing ConvNet (VGG-19)...'
+    z['net'] = load('net', create_covnet)
+
+    print 'Loading captions...'
+    z['cap'] = load('cap', create_captions)
+
+    print 'Embedding captions...'
+    z['cvec'] = load('cvec', lambda: embedding.encode_sentences(vse, cap, verbose=False))
+
+    print 'Loading biases...'
+    z['bneg'] = load('bneg', lambda: numpy.load(config.paths['negbias']))
+    z['bpos'] = load('bpos', lambda: numpy.load(config.paths['posbias']))
 
     return z
+
 
 def load_image(file_name):
     """
