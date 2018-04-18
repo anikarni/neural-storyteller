@@ -1,6 +1,7 @@
 import React from 'react'
 import Hero from './hero'
 import Camera from './Camera'
+import Story from './Story'
 
 const App = () =>
   <div>
@@ -9,6 +10,7 @@ const App = () =>
     </nav>
     <Hero />
     <Camera />
+    <Story />
     <footer className="footer">
       <span className="text-muted">Footer</span>
     </footer>
