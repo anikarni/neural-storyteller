@@ -21,7 +21,7 @@ const displayResultSection = () => {
 }
 
 const displayImage = imageUri =>
-  document.getElementById('picture').innerHTML = '<img src="'+imageUri+'"/>';
+  $('#picture').html('<img src="' + imageUri + '"/>')
 
 const displayStory = story =>
   $('#story').html(story)
