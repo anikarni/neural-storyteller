@@ -10,6 +10,7 @@
  - [ ] ask for permission to save/share image/story
  - [ ] button back
  - [ ] wtf?
+ - [ ] Host bootstrap locally
 
 
  - [ ] search?
