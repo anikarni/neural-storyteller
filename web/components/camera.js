@@ -1,7 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Webcam from 'webcamjs'
 
-const takeSnapshot = () => console.log('snapshot')
+const takeSnapshot = () => {
+  Webcam.snap(imageUri => {
+    //displayImage(imageUri)
+    //generateStory(imageUri)
+  });
+}
 
 class Camera extends React.Component {
   componentDidMount() {
@@ -25,6 +31,7 @@ class Camera extends React.Component {
       <div id="take-picture" className="container">
         <div id="my_camera"></div>
         <a onClick={takeSnapshot}>Take Snapshot</a>
+        <Link to='/story' someProp='someValue'>Take</Link>
       </div>
     )
   }
