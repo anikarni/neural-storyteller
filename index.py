@@ -1,12 +1,14 @@
 import eel
 import string
 import random
-import redis
+import sqlite3
 from neural import generate
 
 eel.init('web')
-r = redis.StrictRedis(host='localhost', port=6379, db=0)
-z = generate.load_all(r)
+conn = sqlite3.connect('neural.db')
+conn.text_factory = str
+c = conn.cursor()
+z = generate.load_all(c, conn)
 
 @eel.expose
 def generate_story(image):
@@ -15,9 +17,9 @@ def generate_story(image):
     fh = open(filepath, "wb")
     fh.write(image.decode('base64'))
     fh.close()
-    story = generate.story(z, filename)
-    r.hset(filename, 'image', filepath)
-    r.hset(filename, 'story', story)
+    story = generate.story(z, filepath)
+    c.execute("INSERT INTO photos VALUES (?, ?)", (filepath, story))
+    conn.commit()
     return story
 
 _options = { 'mode': 'None' }

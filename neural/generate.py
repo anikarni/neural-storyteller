@@ -6,8 +6,7 @@ import numpy
 import copy
 import sys
 import skimage.transform
-import pickle
-import json
+import sqlite3
 
 import skipthoughts
 import decoder
@@ -96,17 +95,21 @@ def create_captions():
     return cap
 
 
-def load_all(redis):
+def load_all(c, conn):
     """
     Load everything we need for generating
     """
+
     def load(field_name, create_field):
-        field = redis.get(field_name)
-        if not field:
+        c.execute("SELECT value FROM neural WHERE name = ?", (field_name,))
+        cache_field = c.fetchone()
+        if not cache_field:
             print 'Creating field'
             field = create_field()
-            redis.set(field_name, field)
-        return field
+            c.execute("INSERT INTO neural VALUES (?, ?)", (field_name, pkl.dumps(field)))
+            conn.commit()
+            return field
+        return pkl.loads(str(cache_field[0]))
 
 
     print config.paths['decmodel']
@@ -122,17 +125,17 @@ def load_all(redis):
     z['vse'] = load('vse', lambda: embedding.load_model(config.paths['vsemodel']))
 
     print 'Loading and initializing ConvNet (VGG-19)...'
-    z['net'] = load('net', create_covnet)
+    z['net'] = create_covnet()
 
     print 'Loading captions...'
     z['cap'] = load('cap', create_captions)
 
     print 'Embedding captions...'
-    z['cvec'] = load('cvec', lambda: embedding.encode_sentences(vse, cap, verbose=False))
+    z['cvec'] = load('cvec', lambda: embedding.encode_sentences(z['vse'], z['cap'], verbose=False))
 
     print 'Loading biases...'
-    z['bneg'] = load('bneg', lambda: numpy.load(config.paths['negbias']))
-    z['bpos'] = load('bpos', lambda: numpy.load(config.paths['posbias']))
+    z['bneg'] = numpy.array(load('bneg', lambda: numpy.load(config.paths['negbias']).tolist()))
+    z['bpos'] = numpy.array(load('bpos', lambda: numpy.load(config.paths['posbias']).tolist()))
 
     return z
 
