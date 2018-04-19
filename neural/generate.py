@@ -116,26 +116,26 @@ def load_all(c, conn):
     z = {}
 
     print 'Loading skip-thoughts...'
-    z['stv'] = load('stv', lambda: skipthoughts.load_model(config.paths['skmodels'], config.paths['sktables']))
+    z['stv'] = skipthoughts.load_model(config.paths['skmodels'], config.paths['sktables'])
 
     print 'Loading decoder...'
-    z['dec'] = load('dec', lambda: decoder.load_model(config.paths['decmodel'], config.paths['dictionary']))
+    z['dec'] = decoder.load_model(config.paths['decmodel'], config.paths['dictionary'])
 
     print 'Loading image-sentence embedding...'
-    z['vse'] = load('vse', lambda: embedding.load_model(config.paths['vsemodel']))
+    z['vse'] = embedding.load_model(config.paths['vsemodel'])
 
     print 'Loading and initializing ConvNet (VGG-19)...'
     z['net'] = create_covnet()
 
     print 'Loading captions...'
-    z['cap'] = load('cap', create_captions)
+    z['cap'] = create_captions()
 
     print 'Embedding captions...'
-    z['cvec'] = load('cvec', lambda: embedding.encode_sentences(z['vse'], z['cap'], verbose=False))
+    z['cvec'] = embedding.encode_sentences(z['vse'], z['cap'], verbose=False)
 
     print 'Loading biases...'
-    z['bneg'] = numpy.array(load('bneg', lambda: numpy.load(config.paths['negbias']).tolist()))
-    z['bpos'] = numpy.array(load('bpos', lambda: numpy.load(config.paths['posbias']).tolist()))
+    z['bneg'] = numpy.load(config.paths['negbias'])
+    z['bpos'] = numpy.load(config.paths['posbias'])
 
     return z
 
