@@ -3,8 +3,10 @@ import string
 import random
 import sqlite3
 from neural import generate
+import bottle
+import os
 
-eel.init('web')
+eel.init('web/dist')
 conn = sqlite3.connect('neural.db')
 conn.text_factory = str
 c = conn.cursor()
@@ -22,6 +24,10 @@ def generate_story(image):
     conn.commit()
     return story
 
+@bottle.route('/')
+def _static():
+    return bottle.static_file('index.html', root=os.path.abspath('web/dist'))
+
 _options = { 'mode': 'None' }
-eel.start('bundle/index.html', options=_options)
+eel.start('', options=_options)
 
