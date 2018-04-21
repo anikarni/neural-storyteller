@@ -1,28 +1,27 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import Webcam from 'webcamjs'
 
-const takeSnapshot = () => {
+Webcam.set({
+    width: 700,
+    height: 530,
+    dest_width: 640,
+    dest_height: 480,
+    image_format: 'jpeg',
+    jpeg_quality: 90,
+    force_flash: false,
+    flip_horiz: true,
+    fps: 45
+})
+
+const takeSnapshot = (history) => {
   Webcam.snap(imageUri => {
-    //displayImage(imageUri)
-    //generateStory(imageUri)
+    history.push('/story', { imageUri })
   });
 }
 
 class Camera extends React.Component {
   componentDidMount() {
-    Webcam.set({
-        width: 700,
-        height: 530,
-        dest_width: 640,
-        dest_height: 480,
-        image_format: 'jpeg',
-        jpeg_quality: 90,
-        force_flash: false,
-        flip_horiz: true,
-        fps: 45
-    })
-
     Webcam.attach('#my_camera')
   }
 
@@ -30,11 +29,10 @@ class Camera extends React.Component {
     return (
       <div id="take-picture" className="container">
         <div id="my_camera"></div>
-        <a onClick={takeSnapshot}>Take Snapshot</a>
-        <Link to='/story' someProp='someValue'>Take</Link>
+        <a onClick={takeSnapshot.bind(null, this.props.history)}>Take Snapshot</a>
       </div>
     )
   }
 }
 
-export default Camera
+export default withRouter(Camera)
