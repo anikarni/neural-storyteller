@@ -8,5 +8,5 @@ import './styles/styles.scss'
 ReactDOM.render(
 	<BrowserRouter>
 		<App />
-	</BrowserRouter>, document.querySelector('body')
+	</BrowserRouter>, document.getElementById('app')
 );

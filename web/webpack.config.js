@@ -33,6 +33,9 @@ module.exports = {
     extensions: ['*', '.js', '.jsx']
   },
   plugins: [
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin({
+      title: 'Neural Storyteller',
+      template: 'index.html'
+    })
   ]
 };
