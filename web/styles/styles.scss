@@ -1,29 +1,55 @@
 @import "~bootstrap/scss/bootstrap";
 
-.footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 7%;
-  line-height: 60px;
-  background-color: #f5f5f5;
+body {
+  text-align: center;
+  background-color: #FFF9F4;
+  font-color: #7A7570;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.jumbotron {
-  height: 85%;
+h1 {
+  margin-bottom: 0.5em;
+  color: #3D3A47;
+  font-weight: 400 !important;
+  font-size: 5em !important;
+}
+
+a {
+  color: #FFF9F4 !important;
+  text-decoration: none !important;
+  background-color: #3D3A47;
+  border-radius: 1em;
+  padding: 1em 2em;
+  margin: 1em;
+  display: inline-block;
+}
+
+a:hover {
+  background-color: 7A7570;
+}
+
+.hero {
+  padding: 0 20em;
 }
 
 #result {
-  padding: 50px 40px;
-}
-
-.container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
-#picture {
-  margin-right: 20px;
+#result div, #result p {
+  width: 35em;
+  display: block;
+  margin: -1em 1em 4em 1em;
+}
+
+#picture img {
+  width: inherit;
+  border-radius: 1em;
+}
+
+#story {
+  padding: 3em;
+  border-radius: 1em;
 }

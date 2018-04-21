@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+const lorem = 'My woman gave her a little glance . Yes , she was in love with me , and I could n\'t help but notice the smug look on her face . It was the first time I entered his room , to find out what had happened to her . Her hair hung loose around her shoulders , making her feel as if she were the only girl in the world . In fact , it had taken a lot of patience for the young woman s body . She was so eager to witness that , the old stranger stripped down and forth with her face'
+
 const extractBase64FromImageUri = base64Uri =>
   base64Uri.substring(base64Uri.indexOf(",") + 1)
-
 
 class Story extends React.Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class Story extends React.Component {
     const image = extractBase64FromImageUri(this.props.location.state.imageUri)
     global.eel
       ? global.eel.generate_story(image)(this.updateStory.bind(this))
-      : this.updateStory([null, 'Not running backend'])
+      : this.updateStory([null, lorem])
   }
 
   updateStory([filepath, story]) {
@@ -30,13 +31,20 @@ class Story extends React.Component {
 
   render() {
     return (
-      <div id="result">
-        <div id="picture">
-          <img src={this.props.location.state.imageUri}/>
+      <div>
+        <div id="result">
+          <div id="picture">
+            <img src={this.props.location.state.imageUri}/>
+          </div>
+          <p id="story">{ this.state.story }</p>
         </div>
-        <p id="story">{ this.state.story }</p>
-        <a onClick={this.saveStory.bind(this)}>Save</a>
-        <Link to='/'>Cancel</Link>
+        <div>
+          <p style={{color: '#7A7570'}}>
+            We'd love to share these stories will other SHOPA patients. Can we?
+          </p>
+          <a onClick={this.saveStory.bind(this)}>Yes, please share the love!</a>
+          <Link to='/'>Nah, thanks</Link>
+        </div>
       </div>
     )
   }
