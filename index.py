@@ -20,9 +20,13 @@ def generate_story(image):
     fh.write(image.decode('base64'))
     fh.close()
     story = generate.story(z, filepath)
-    c.execute("INSERT INTO photos VALUES (?, ?)", (filepath, story))
-    conn.commit()
-    return story
+    return [filepath, story]
+
+@eel.expose
+def save_story(filepath, story):
+    if filepath and story:
+        c.execute("INSERT INTO photos VALUES (?, ?)", (filepath, story))
+        conn.commit()
 
 @bottle.route('/')
 def _static():
