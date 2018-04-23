@@ -14,23 +14,41 @@ Webcam.set({
     fps: 45
 })
 
-const takeSnapshot = (history) => {
-  Webcam.snap(imageUri => {
-    history.push('/story', { imageUri })
-  });
-}
-
 class Camera extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { disabled: true }
+  }
+
   componentDidMount() {
     Webcam.attach('#my_camera')
+    Webcam.on('live', () => {
+      this.setState({ disabled: false })
+    })
   }
+
+  takeSnapshot() {
+    if (this.state.disabled) { return }
+    this.setState({ count: 5, disabled: true })
+    const loop = setInterval(() => {
+      this.setState({ count: this.state.count - 1 })
+      if (this.state.count === 0) {
+        Webcam.snap(imageUri => { this.props.history.push('/story', { imageUri }) });
+        clearInterval(loop)
+      }
+    }, 1000)
+  }
+
 
   render() {
     return (
       <div id="take-picture">
         <p id="loading-camera">Loading camera...</p>
         <div id="my_camera"></div>
-        <a onClick={takeSnapshot.bind(null, this.props.history)}>Take Snapshot</a>
+        <h2 id="countdown">{this.state.count}</h2>
+        <a
+          onClick={this.takeSnapshot.bind(this)}
+          className={this.state.disabled ? "disabled" : ""}>Take Snapshot</a>
       </div>
     )
   }
