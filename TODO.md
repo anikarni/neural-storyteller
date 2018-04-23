@@ -6,8 +6,8 @@
  - [x] initial page with instructions
  - [ ] page for showing pictures + stories that were already created
  - [ ] train model with theme content
- - [ ] wtf?
- - [ ] style
+ - [x] wtf?
+ - [x] style
  - [x] button back
  - [X] Host bootstrap locally
 
