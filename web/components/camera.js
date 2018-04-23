@@ -28,6 +28,7 @@ class Camera extends React.Component {
   render() {
     return (
       <div id="take-picture">
+        <p id="loading-camera">Loading camera...</p>
         <div id="my_camera"></div>
         <a onClick={takeSnapshot.bind(null, this.props.history)}>Take Snapshot</a>
       </div>

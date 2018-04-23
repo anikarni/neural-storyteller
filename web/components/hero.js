@@ -2,9 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Hero = () =>
-  <div class="hero">
+  <div className="hero">
     <h1 className="display-4">Neural Storyller</h1>
-    <p>We know you're having a blast and you probably know it too. How would you describe this experience in a song lyric or a novel, though? Let us give it a try. Snap a picture, we'll tell you a story.</p>
+    <hr/>
+    <p>Your time here requires a souvenir as creative as your experience. We don't trust a computer to provide a worthy one, but we thought it might be fun to try it. Snap a picture of something that matters to you and let us run some magic and create a short story for you.</p>
     <Link to='/camera'>Start here!</Link>
   </div>
 
