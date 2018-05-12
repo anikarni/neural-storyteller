@@ -12,7 +12,8 @@ class Story extends React.Component {
 
   componentWillMount() {
     const image = extractBase64FromImageUri(this.props.location.state.imageUri)
-    if (global.eel) global.eel.generate_story(image, false)(this.updateStory.bind(this))
+    const lyrics = this.props.location.state.lyrics
+    if (global.eel) global.eel.generate_story(image, lyrics)(this.updateStory.bind(this))
   }
 
   updateStory([filepath, story]) {

@@ -3,12 +3,13 @@ $fa-font-path: "~font-awesome/fonts";
 @import '~font-awesome/scss/font-awesome';
 
 body {
-  text-align: center;
   background-color: #FFF9F4;
   font-color: #7A7570;
   display: flex;
   align-items: center;
+  text-align: center;
   justify-content: center;
+  height: 100%;
 }
 
 footer {
@@ -90,6 +91,10 @@ a.disabled {
 
 .hero {
   padding: 0 20em;
+}
+
+input[type=checkbox] {
+  margin-right: 1px;
 }
 
 #loading-camera {

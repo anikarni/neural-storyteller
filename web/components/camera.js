@@ -30,10 +30,11 @@ class Camera extends React.Component {
   takeSnapshot() {
     if (this.state.disabled) { return }
     this.setState({ count: 5, disabled: true })
+    const lyrics = document.getElementById('lyrics').checked
     const loop = setInterval(() => {
       this.setState({ count: this.state.count - 1 })
       if (this.state.count === 0) {
-        Webcam.snap(imageUri => { this.props.history.push('/story', { imageUri }) });
+        Webcam.snap(imageUri => { this.props.history.push('/story', { imageUri, lyrics }) });
         clearInterval(loop)
       }
     }, 1000)
@@ -46,6 +47,13 @@ class Camera extends React.Component {
         <p id="loading-camera">Loading camera...</p>
         <div id="my_camera"></div>
         <h2 id="countdown">{this.state.count}</h2>
+        <div>
+          <input type="checkbox" name="lyrics" id="lyrics"/>
+          <label htmlFor="lyrics"
+            style={{color: '#7A7570', textTransform: 'uppercase'}}>
+            I want Taylor Swift lyrics instead of a novel passage, please! Thx!
+          </label>
+        </div>
         <a
           onClick={this.takeSnapshot.bind(this)}
           className={this.state.disabled ? "disabled" : ""}>Take Snapshot</a>
