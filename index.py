@@ -35,6 +35,9 @@ def get_stories():
     return map(lambda image: { 'image': image[0], 'story': image[1] }, images)
 
 @bottle.route('/')
+@bottle.route('/stories')
+@bottle.route('/story')
+@bottle.route('/camera')
 def _static():
     return bottle.static_file('index.html', root=os.path.abspath('web/dist'))
 
