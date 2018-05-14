@@ -16,7 +16,7 @@ z = generate.load_all(c, conn)
 def generate_story(image):
     filename = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20))
     filepath = 'images/' + filename + '.jpg'
-    fh = open(filepath, "wb")
+    fh = open('web/dist/' + filepath, "wb")
     fh.write(image.decode('base64'))
     fh.close()
     story = generate.story(z, filepath)
@@ -27,6 +27,12 @@ def save_story(filepath, story):
     if filepath and story:
         c.execute("INSERT INTO photos VALUES (?, ?)", (filepath, story))
         conn.commit()
+
+@eel.expose
+def get_stories():
+    c.execute("SELECT * FROM photos")
+    images = c.fetchall()
+    return map(lambda image: { 'image': image[0], 'story': image[1] }, images)
 
 @bottle.route('/')
 def _static():

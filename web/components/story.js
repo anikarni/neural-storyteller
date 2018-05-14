@@ -26,7 +26,6 @@ class Story extends React.Component {
   }
 
   render() {
-    console.log(this.state.story)
     return (
       <div>
         <div id="result">

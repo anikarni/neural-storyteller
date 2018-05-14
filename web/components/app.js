@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import Hero from './hero'
 import Camera from './Camera'
 import Story from './Story'
+import Stories from './Stories'
 
 const App = () =>
   <div>
@@ -10,6 +11,7 @@ const App = () =>
       <Route exact path='/' component={Hero}/>
       <Route path='/camera' component={Camera}/>
       <Route path='/story' component={Story}/>
+      <Route path='/stories' component={Stories}/>
     </Switch>
     <footer>
       <div className="info">

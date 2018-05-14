@@ -10,7 +10,9 @@ __pycache__/
 env/
 build/
 develop-eggs/
-dist/
+web/dist/bundle.js
+web/dist/font*
+web/dist/index.html
 downloads/
 eggs/
 .eggs/
@@ -59,7 +61,6 @@ target/
 # Frontend
 web/node_modules
 web/bundle/bundle.js
-images/
 .DS_Store
 
 # Vim
