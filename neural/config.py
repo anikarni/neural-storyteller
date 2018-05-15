@@ -37,3 +37,4 @@ paths['captions'] = os.path.abspath('./neural/models/coco_train_caps.txt')
 # Biases
 paths['negbias'] = os.path.abspath('./neural/models/caption_style.npy')
 paths['posbias'] = os.path.abspath('./neural/models/romance_style.npy')
+paths['posbias_swift'] = os.path.abspath('./neural/models/swift_style.npy')

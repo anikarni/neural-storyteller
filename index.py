@@ -11,15 +11,18 @@ conn = sqlite3.connect('neural.db')
 conn.text_factory = str
 c = conn.cursor()
 z = generate.load_all(c, conn)
+z_swift = dict(z)
+z_swift['bpos'] = generate.load_posbias()
 
 @eel.expose
-def generate_story(image):
+def generate_story(image, lyrics):
     filename = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20))
     filepath = 'images/' + filename + '.jpg'
     fh = open('web/dist/' + filepath, "wb")
     fh.write(image.decode('base64'))
     fh.close()
-    story = generate.story(z, filepath)
+    trained_models = z_swift if lyrics else z
+    story = generate.story(trained_models, 'web/dist/' + filepath, lyric=lyrics)
     return [filepath, story]
 
 @eel.expose

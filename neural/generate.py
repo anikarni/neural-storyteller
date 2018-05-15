@@ -94,6 +94,8 @@ def create_captions():
             cap.append(line.strip())
     return cap
 
+def load_posbias():
+    return numpy.load(config.paths['posbias_swift'])
 
 def load_all(c, conn):
     """
