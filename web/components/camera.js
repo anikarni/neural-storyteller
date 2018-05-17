@@ -47,13 +47,16 @@ class Camera extends React.Component {
         <p id="loading-camera">Loading camera...</p>
         <div id="my_camera"></div>
         <h2 id="countdown">{this.state.count}</h2>
-        <div>
+        <div className="pretty p-switch p-fill">
           <input type="checkbox" name="lyrics" id="lyrics"/>
-          <label htmlFor="lyrics"
-            style={{color: '#7A7570', textTransform: 'uppercase'}}>
-            I want Taylor Swift lyrics instead of a novel passage, please! Thx!
-          </label>
+          <div className="state">
+            <label htmlFor="lyrics"
+              style={{color: '#7A7570', textTransform: 'uppercase'}}>
+              I want Taylor Swift lyrics instead of a story, please! Thx!
+            </label>
+          </div>
         </div>
+        <div/>
         <a
           onClick={this.takeSnapshot.bind(this)}
           className={this.state.disabled ? "disabled" : ""}>Take Snapshot</a>

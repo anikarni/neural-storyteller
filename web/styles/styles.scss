@@ -1,6 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
 $fa-font-path: "~font-awesome/fonts";
 @import '~font-awesome/scss/font-awesome';
+@import '~pretty-checkbox/src/pretty-checkbox';
 
 body {
   background-color: #FFF9F4;
@@ -93,8 +94,9 @@ a.disabled {
   padding: 0 20em;
 }
 
-input[type=checkbox] {
-  margin-right: 1px;
+.pretty {
+  margin-right: 0;
+  margin-bottom: 1em;
 }
 
 #loading-camera {
@@ -125,8 +127,9 @@ input[type=checkbox] {
   text-align: center;
   z-index: 99;
   overflow: hidden;
-  font-size: 15em;
-  color: #FFF9F4;
+  font-size: 17em;
+  color: #9C484C;
+  font-weight: 700;
 }
 
 #result {
