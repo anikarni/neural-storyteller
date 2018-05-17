@@ -69,4 +69,4 @@ web/bundle/bundle.js
 
 # models
 models/
-
+neural.db
