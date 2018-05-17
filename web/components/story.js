@@ -33,7 +33,9 @@ class Story extends React.Component {
           <div id="picture">
             <img src={this.props.location.state.imageUri}/>
           </div>
-          <p id="story">{ this.state.story || 'Generating story... Give us a few minutes in the name of inspiration and creativity.' }</p>
+          <p id="story" style={{whiteSpace: 'pre-line'}}>
+            { this.state.story || 'Generating story... Give us a few minutes in the name of inspiration and creativity.' }
+          </p>
         </div>
         <div>
           <p style={{color: '#7A7570'}}>
