@@ -15,7 +15,7 @@ z_swift = dict(z)
 z_swift['bpos'] = generate.load_posbias()
 
 @eel.expose
-def generate_story(image, lyric=False):
+def generate_story(image, lyrics):
     filename = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20))
     filepath = 'images/' + filename + '.jpg'
     fh = open('web/dist/' + filepath, "wb")
