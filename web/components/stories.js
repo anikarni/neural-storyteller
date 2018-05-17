@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 class Stories extends React.Component {
   constructor(props) {
@@ -25,11 +26,14 @@ class Stories extends React.Component {
     const story = (stories) ? stories[this.state.index] : {}
     if (stories) setTimeout(this.nextIndex.bind(this), 20000)
     return (
-      <div id='result' className="stories">
-        <div id="picture">
-          <img src={story.image}/>
+      <div>
+        <div id='result'>
+          <div id="picture">
+            <img src={story.image||'images/9ZIQCUMZAQ7AXK77379P.jpg'}/>
+          </div>
+          <p id="story" style={{whiteSpace: 'pre-line'}}>{story.story || 'dsdadas'}</p>
         </div>
-        <p id="story" style={{whiteSpace: 'pre-line'}}>{story.story}</p>
+        <Link to='/'>Back to home page</Link>
       </div>
     )
   }
