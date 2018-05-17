@@ -4,8 +4,7 @@
  - [x] ask for permission to save/share image/story
  - [x] countdown for picture taking
  - [x] initial page with instructions
- - [ ] page for showing pictures + stories that were already created
- - [ ] train model with theme content
+ - [x] page for showing pictures + stories that were already created
  - [x] wtf?
  - [x] style
  - [x] button back
@@ -14,3 +13,4 @@
 
  - [ ] search?
  - [ ] bootstrap from redis
+ - [ ] train model with theme content
