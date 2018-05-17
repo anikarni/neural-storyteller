@@ -21,7 +21,7 @@ class Story extends React.Component {
       ? story.split(',')
       : story
 
-    this.setState({ filepath, formattedStory, disabled: false })
+    this.setState({ filepath, story: formattedStory, disabled: false })
   }
 
   saveStory() {
