@@ -17,7 +17,11 @@ class Story extends React.Component {
   }
 
   updateStory([filepath, story]) {
-    this.setState({ filepath, story, disabled: false })
+    const formattedStory = this.props.location.state.lyrics
+      ? story.split(',')
+      : story
+
+    this.setState({ filepath, formattedStory, disabled: false })
   }
 
   saveStory() {
