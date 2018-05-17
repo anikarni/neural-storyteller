@@ -23,13 +23,13 @@ class Stories extends React.Component {
   render() {
     const { stories } = this.state
     const story = (stories) ? stories[this.state.index] : {}
-    if (stories) setTimeout(this.nextIndex.bind(this), 15000)
+    if (stories) setTimeout(this.nextIndex.bind(this), 20000)
     return (
-      <div className="stories">
+      <div id='result' className="stories">
         <div id="picture">
           <img src={story.image}/>
-          <p id="story">{story.story}</p>
         </div>
+        <p id="story" style={{whiteSpace: 'pre-line'}}>{story.story}</p>
       </div>
     )
   }
